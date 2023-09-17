@@ -1,16 +1,19 @@
-import {player} from "../firebase/database"
-import {app, docSnap} from "../firebase/firebase"
+//import player from '../firebase/database.ts'
+import cagersRef from '../firebase/firebase.ts'
+import firestore from 'firebase/firestore'
 
-
-export const load = () => {
-    // app.db_Realtime.app.
-    
-    console.log(docSnap.data)
-    
-    //let players = JSON.parse(player.toJSON())
-  //
-    //players.forEach((p: any) => {
-    //    console.log(p);
-    //});
-  }
-
+export function load(){
+	console.log(cagersRef);
+	cagersRef.listDocuments().then(documentRefs => {
+		return firestore.getAll(...documentRefs);
+	}).then(documentSnapshots => {
+		for (let documentSnapshot of documentSnapshots){
+			if (documentSnapshot.exists){
+				console.log(documentSnapshot.id);
+			}
+			else{
+				console.log("fant ikke ${documentSnapshot.id}")
+			}
+		}
+	})
+}

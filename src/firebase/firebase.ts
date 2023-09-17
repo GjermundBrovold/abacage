@@ -1,7 +1,7 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { initializeApp, getApp, getApps} from "firebase/app";
+import { getFirestore} from "firebase/firestore";
 import { getDatabase } from "firebase/database";
-import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSEGING_SENDER_ID, APP_ID, MEASUREENT_ID } from "$env/static/private";
+import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSEGING_SENDER_ID, APP_ID, MEASUREENT_ID, REALTIME_DATABASE_NAME } from "$env/static/private";
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 
 
@@ -13,27 +13,35 @@ export const firebaseConfig = {
   messagingSenderId: MESSEGING_SENDER_ID,
   appId: APP_ID,
   measurementId: MEASUREENT_ID,
-  //databaseURL: REALTIME_DATABASE_NAME,
+  databaseURL: REALTIME_DATABASE_NAME,
 };
-
-console.log("_/------");
-console.log(firebaseConfig.apiKey);
-
-
-
-
-
-
+console.log(firebaseConfig.databaseURL);
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 const db_Firestore = getFirestore(app);
 const db_Realtime = getDatabase(app);
 
-const docRef = doc(db_Firestore, "cagers");
-export const docSnap = await getDoc(docRef);
+export const cagersRef = collection(db_Firestore, "cagers");
+console.log(cagersRef);
+cagersRef.get().listDocuments().then(documentRefs => {
+  return firestore.getAll(...documentRefs);
+  }).then(documentSnapshots => {
+    for (let documentSnapshot of documentSnapshots){
+      if (documentSnapshot.exists){
+        console.log(documentSnapshot.id);
+      }
+      else{
+        console.log("fant ikke ${documentSnapshot.id}")
+      }
+    }
+})
 
 
-export default { db_Firestore, db_Realtime };
+//const docRef = doc(db_Firestore, "cagers");
+//export const docSnap = await getDoc(docRef);
+
+
+export { db_Firestore, db_Realtime};
 
 
 
