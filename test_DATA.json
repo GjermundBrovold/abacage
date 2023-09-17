@@ -1,0 +1,44 @@
+{
+  "players": [
+    {
+      "id": 1,
+      "name": "Lionel Messi",
+      "team": "Paris Saint-Germain",
+      "position": "Forward",
+      "age": 34,
+      "nationality": "Argentinian"
+    },
+    {
+      "id": 2,
+      "name": "Cristiano Ronaldo",
+      "team": "Manchester United",
+      "position": "Forward",
+      "age": 36,
+      "nationality": "Portuguese"
+    },
+    {
+      "id": 3,
+      "name": "Neymar Jr.",
+      "team": "Paris Saint-Germain",
+      "position": "Forward",
+      "age": 29,
+      "nationality": "Brazilian"
+    },
+    {
+      "id": 4,
+      "name": "Virgil van Dijk",
+      "team": "Liverpool",
+      "position": "Defender",
+      "age": 30,
+      "nationality": "Dutch"
+    },
+    {
+      "id": 5,
+      "name": "Kevin De Bruyne",
+      "team": "Manchester City",
+      "position": "Midfielder",
+      "age": 30,
+      "nationality": "Belgian"
+    }
+  ]
+}
