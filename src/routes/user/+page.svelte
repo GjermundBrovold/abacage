@@ -1,15 +1,15 @@
 <script lang="ts">
-    import default_profile_picture from '$lib/images/default-profile-picture.png'
+    import default_profile_picture from '$lib/images/default.png'
 
     export let player: {
-		name: string;
-		nickname: string;
+        name: string;
+        nickname: string;
         gamesPLayed: number;
         sessionsPlayed: number;
-		score: number;
+        score: number;
         pictureUrl: string;
         isAdmin: boolean;
-	}
+    }
 
     if (player.pictureUrl == "") {
         player.pictureUrl = default_profile_picture
