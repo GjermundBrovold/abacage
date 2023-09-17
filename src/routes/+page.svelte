@@ -1,19 +1,11 @@
 <script>
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+    import Header from "./Header.svelte";
+    import Scoreboard from "./Scoreboard/Scoreboard.svelte";
+    import Footer from "./Footer.svelte";
 </script>
 
-<svelte:head>
-	<title>Home</title>
-	<meta name="description" content="Svelte demo app" />
-</svelte:head>
-
-<section>
-	<h1>
-		CAGE
-	</h1>
-	<a href='/user'>User</a>
-</section>
-
-<style>
-</style>
+<div>
+    <Header />
+    <Scoreboard />
+    <Footer />
+</div>
