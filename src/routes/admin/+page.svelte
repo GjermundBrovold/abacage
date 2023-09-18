@@ -35,8 +35,8 @@
     <h1>Add Players</h1>
     <ul>
         {#each $players as player, index}
-               <li on:click={addOrRemovePlayer(player)}>
-                    <input type="checkbox" name="checkbox{index}" id="checkbox{index}">
+               <li>
+                    <input on:click={addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
                     <label for="checkbox{index}">
                         <img src="{player.profilePictureUrl}" alt="{player.nickname}'s profile pic">
                         <div class="name-container">
@@ -48,7 +48,8 @@
         {/each}
     </ul>
 
-    <a href="/dashboard">yeah</a>
+
+    <a href="/dashboard ">yeah</a>
 </div>
 
 
@@ -56,15 +57,17 @@
 <style lang="scss">
     ul {
         list-style: none;
+        padding: 0;
         li {
             display: flex;
-            input {
-
+            margin-bottom: 1em;
+            input[type="checkbox"] {
+                margin: 0 1em;
             }
             label {
                 display: flex;
                 img {
-                    height: 100px;
+                    height: 5em;
                     aspect-ratio: 1;
                     border-radius: 50%;
                     margin-right: 1em;
@@ -73,15 +76,26 @@
                 .name-container {
                     display: flex;
                     flex-direction: column;
-                    h2 {
+                    justify-content: center;
 
+                    & > * {
+                        margin: 0;
+                    }
+                    h2 {
+                        font-size: 1.25em;
                     }
 
                     h3 {
-
+                        font-size: 0.75em;
+                        font-weight: 100;
+                        color: rgba($color: #000000, $alpha: .5);
                     }
                 }
             }
+        }
+
+        a {
+
         }
     }
 </style>
