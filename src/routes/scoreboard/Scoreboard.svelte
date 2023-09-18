@@ -1,5 +1,4 @@
 <script lang="ts" type="module">
-import { writable } from 'svelte/store';
 import ScoreboardItem from './ScoreboardItem.svelte'
 import { playerArray } from '../../firebase/firebase.mjs'
 
@@ -18,10 +17,17 @@ import { playerArray } from '../../firebase/firebase.mjs'
 
 
 <ul>
-	{#each $playerArray as player}
-		<ScoreboardItem {player} />
+	{#each $playerArray as player, index}
+		<div class="wrapper">
+			<div class="rank-container">
+				<div class="rank">{index + 1}</div>
+			</div>
+			<ScoreboardItem {player} />
+		</div>
 	{/each}
 	
+	
+
 </ul>
 
 <style lang="scss">
@@ -30,6 +36,16 @@ import { playerArray } from '../../firebase/firebase.mjs'
 		to { opacity: 0; }
 	}
 
+	.wrapper {
+		display: flex;
+    	align-items: center;
+		.rank-container {
+			font-size: 1.5em;
+			width: 10vw;
+			display: grid;
+			place-items: center;
+		}
+	}
 
 
 	.subheader {

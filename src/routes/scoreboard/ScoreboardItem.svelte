@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { createEventDispatcher } from 'svelte';
-	
-	const dispatch = createEventDispatcher();
 	
 	export let player: {
 		name: string;
@@ -9,16 +6,17 @@
 		gamesPLayed: number;
 		sessionsPlayed: number;
 		score: number;
-		pictureUrl: string;
+		profilePictureUrl: string;
 		isAdmin: boolean;
 	}
 	
-	console.log(player.pictureUrl);
+	console.log(player.name);
+	console.log(player.profilePictureUrl);
 	
 </script>
 	
 	<li>
-		<img src={player.pictureUrl} alt="{player.name}'s profile picture" />
+		<img src={player.profilePictureUrl} alt="{player.name}'s profile picture" />
 		<div class="container">
 			<div class='name-container'>
 				<div class='nickname'>{player.nickname}</div>
@@ -34,7 +32,8 @@
 	li {
 		display: flex;
 		align-items: center;
-		margin: 1em;
+		margin-bottom: 1em;
+		width: 90vw;
 
 		img {
 			height: 4em;
@@ -66,6 +65,7 @@
 
 			.score {
 				font-size: 1.5em;
+				margin: 1em;
 			}
 		}
 	}
