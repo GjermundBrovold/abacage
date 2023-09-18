@@ -1,5 +1,6 @@
 
 import {playerArray} from '../../firebase/firebase.mjs'
+import {selectedPlayers} from '../admin/selectedPlayers.ts'
 
 let player: {
 	name: string;
@@ -10,8 +11,8 @@ let player: {
 	profilePictureUrl: string;
 	isAdmin: boolean;
 }
-export let players : Array<player>;
-
+console.log(selectedPlayers);
+let players = selectedPlayers;
 let rounds = 0;
 export let numberOfTeams:number = 2;
 
@@ -65,4 +66,4 @@ export default function newTeams() {
 	}
 
 	return teams;
-	}
+}

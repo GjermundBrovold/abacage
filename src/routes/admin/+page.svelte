@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { writable } from "svelte/store";
+    import { writable } from "svelte/store";
     import { playerArray } from "../../firebase/firebase.mjs";
+    import { updatePlayer } from './selectedPlayers.ts'
 	
     let player: {
 		name: string;
@@ -17,17 +18,10 @@
         players = writable(arr)
     })
 
-    export let selectedPlayers:Array<typeof player> = []
+    export const selectedPlayers:Array<typeof player> = []
 
     function addOrRemovePlayer(p: typeof player) {
-        if (selectedPlayers.indexOf(p) != -1) {
-            console.log("removed: " + p.name);
-            selectedPlayers.splice(selectedPlayers.indexOf(p), 1)
-        } else {
-            console.log("added: " + p.name);
-            selectedPlayers.push(p)
-        }
-        console.log(selectedPlayers);
+        updatePlayer(p);
     }
 </script>
 
