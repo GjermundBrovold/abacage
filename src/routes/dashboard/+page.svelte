@@ -29,8 +29,8 @@
 	<button on:click = {createTeams}>Create Teams</button>
 
 	<ul>
-		{#each $teams as team}
-			<li>Team</li>
+		{#each $teams as team, index}
+			<li id="team"{index}>Team</li>
 			<!--{#each $team as player}
 				<li>{player.name}</li>
 			{/each}-->
