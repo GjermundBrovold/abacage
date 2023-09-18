@@ -2,6 +2,7 @@
     import { writable } from "svelte/store";
     import { playerArray } from "../../firebase/firebase.mjs";
     import { updatePlayer } from './selectedPlayers.ts'
+    import Footer from "../Footer.svelte";
 	
     let player: {
 		name: string;
@@ -42,9 +43,12 @@
         {/each}
     </ul>
 
-
-    <a href="/dashboard ">yeah</a>
+    <div class="anchor-container">
+        <a href="/dashboard ">Add players</a>
+    </div>
 </div>
+
+<Footer></Footer>
 
 
 
@@ -61,6 +65,7 @@
             label {
                 display: flex;
                 img {
+                    object-fit: cover;
                     height: 5em;
                     aspect-ratio: 1;
                     border-radius: 50%;
@@ -88,8 +93,18 @@
             }
         }
 
+    }
+    .anchor-container {
+        display: grid;
+        place-items: center;
+        width: 100vw;
+        height: 4em;
+        margin-bottom: 1em;
         a {
-
+            text-decoration: none;
+            border: 3px solid black;
+            padding: 1em;
+            border-radius: 10000px;
         }
     }
 </style>

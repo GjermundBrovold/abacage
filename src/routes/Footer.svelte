@@ -6,7 +6,7 @@
 	<h1>CAGE</h1>
 	<h2>Made with love by handsome guys <i class="fa-solid fa-heart fa-xs"></i></h2>
 	<div class="links">
-		<a href='https://vg.no'>
+		<a href='https://github.com/GjermundBrovold/abacage'>
 			<i class="fa-brands fa-github"></i>
 		</a>
 
