@@ -1,60 +1,11 @@
-<script lang="ts">
+<script lang="ts" type="module">
 import { writable } from 'svelte/store';
 import ScoreboardItem from './ScoreboardItem.svelte'
-
-let players = writable([
-	{
-		name:"Kasper",
-		nickname:"Kæsp",
-		score:100,
-	},
-	{
-		name:"Per",
-		nickname:"Pær",
-		score:190,
-	},
-	{
-		name:"Gjermund",
-		nickname:"Top G",
-		score:200,
-	},
-	{
-		name:"Kasper",
-		nickname:"Kæsp",
-		score:100,
-	},
-	{
-		name:"Per",
-		nickname:"Pær",
-		score:190,
-	},
-	{
-		name:"Gjermund",
-		nickname:"Top G",
-		score:200,
-	},
-	{
-		name:"Kasper",
-		nickname:"Kæsp",
-		score:100,
-	},
-	{
-		name:"Per",
-		nickname:"Pær",
-		score:190,
-	},
-	{
-		name:"Gjermund",
-		nickname:"Top G",
-		score:200,
-	}
-]);
-
-export let isLive: boolean;
+import { playerArray } from '../../firebase/firebase.mjs'
 
 </script>
 
-{#if isLive}
+{#if true}
 	<header class="subheader">
 		<h2>Topplisten</h2>
 		<div class="live-container">
@@ -67,9 +18,10 @@ export let isLive: boolean;
 
 
 <ul>
-	{#each $players as player}
+	{#each $playerArray as player}
 		<ScoreboardItem {player} />
 	{/each}
+	
 </ul>
 
 <style lang="scss">

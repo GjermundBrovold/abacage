@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
-	import default_profile_picture from '$lib/images/default.png'
 	
 	const dispatch = createEventDispatcher();
 	
 	export let player: {
 		name: string;
-            nickname: string;
-            gamesPLayed: number;
-            sessionsPlayed: number;
-            score: number;
-            pictureUrl: string;
-            isAdmin: boolean;
+		nickname: string;
+		gamesPLayed: number;
+		sessionsPlayed: number;
+		score: number;
+		pictureUrl: string;
+		isAdmin: boolean;
 	}
 	
-	export let pictureUrl = default_profile_picture;
+	console.log(player.pictureUrl);
+	
 </script>
 	
 	<li>
-		<img src={pictureUrl} alt="{player.name}'s profile picture" />
+		<img src={player.pictureUrl} alt="{player.name}'s profile picture" />
 		<div class="container">
 			<div class='name-container'>
 				<div class='nickname'>{player.nickname}</div>
@@ -39,8 +39,8 @@
 		img {
 			height: 4em;
 			aspect-ratio: 1;
-			padding-right: 1em;
-			
+			margin-right: 1em;
+			border-radius: 50%;
 		}
 
 
@@ -68,8 +68,6 @@
 				font-size: 1.5em;
 			}
 		}
-
-
 	}
 
 
