@@ -2,6 +2,8 @@
 import {playerArray} from '../../firebase/firebase.mjs'
 import {selectedPlayers} from '../admin/selectedPlayers.ts'
 
+import { writable } from "svelte/store";
+
 let player: {
 	name: string;
 	nickname: string;

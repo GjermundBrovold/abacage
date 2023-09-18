@@ -9,7 +9,12 @@
 	let t = []
 	function createTeams(){
 		t = newTeams(numberOfTeams);
-		teams = writable(t);
+		//teams = writable(t);
+		let temp = [];
+		for (let i = 0; i<t.length; i++){
+			temp.push(writable(t[i]));
+		}
+		teams = writable(temp);
 		console.log(t);
 	}
 
@@ -24,8 +29,11 @@
 	<button on:click = {createTeams}>Create Teams</button>
 
 	<ul>
-		{#each $teams as player}
-			<li>{player}</li>
+		{#each $teams as team}
+			<li>Team</li>
+			<!--{#each $team as player}
+				<li>{player.name}</li>
+			{/each}-->
 		{/each}
 	</ul>
 </div>
