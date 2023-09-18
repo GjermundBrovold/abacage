@@ -1,18 +1,17 @@
+
+import {playerArray} from '../../firebase/firebase.mjs'
+
+let players = []
+playerArray.subscribe((arr) => {
+	players = arr;
+})
+
+
 let rounds = 0;
 export let numberOfTeams:number = 2;
-let players = [
-];
-
-for (let i = 0; i < 11; i++) {
-	players.push({
-		name:'Per',
-		score:i,
-	})
-	
-}
 
 function shuffle(array) {
-  let currentIndex = array.length,  randomIndex;
+  let currentIndex = array.length, randomIndex;
 
   // While there remain elements to shuffle.
   while (currentIndex > 0) {
@@ -34,10 +33,12 @@ export function newRound() {
 }
 
 export default function newTeams() {
-	console.log(players);
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
-	console.log(playersPerTeam);
 	let teams = [];
+	let playerCopy = []
+	for (let i = 0; i<players; i++){
+		playerCopy.push(players[i]);
+	}
 	let shuffled = shuffle(players.slice());
 
 	let startIndex = 0;
@@ -52,12 +53,8 @@ export default function newTeams() {
 	}
 
 
-	console.log("Number of extra");
-	console.log(players.length - numberOfTeams*playersPerTeam);
 	let index = 0;
 	for (let i = startIndex; i<players.length; i++){
-		console.log("extra");
-		console.log(shuffled[i]);
 		teams[index].push(shuffled[i]);
 		index ++;
 	}
