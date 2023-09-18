@@ -14,7 +14,6 @@ let player: {
 console.log(selectedPlayers);
 let players = selectedPlayers;
 let rounds = 0;
-export let numberOfTeams:number = 2;
 
 function shuffle(array) {
   let currentIndex = array.length, randomIndex;
@@ -38,11 +37,12 @@ export function newRound() {
 	
 }
 
-export default function newTeams() {
+export default function newTeams(n) {
+	let numberOfTeams = n.target.value
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
 	let teams = [];
 	let playerCopy = []
-	for (let i = 0; i<players; i++){
+	for (let i = 0; i<players.length; i++){
 		playerCopy.push(players[i]);
 	}
 	let shuffled = shuffle(players.slice());
@@ -60,6 +60,7 @@ export default function newTeams() {
 
 
 	let index = 0;
+
 	for (let i = startIndex; i<players.length; i++){
 		teams[index].push(shuffled[i]);
 		index ++;
