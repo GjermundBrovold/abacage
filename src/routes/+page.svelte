@@ -5,8 +5,7 @@ import Footer from "./Footer.svelte";
 </script>
 
 <div>
-    <Header />
-	<a href='/dashboard'>Dashboard</a>
+    <!-- <Header /> -->
     <Scoreboard />
     <Footer />
 </div>

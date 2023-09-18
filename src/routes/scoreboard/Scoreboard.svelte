@@ -6,7 +6,7 @@ import { playerArray } from '../../firebase/firebase.mjs'
 
 {#if true}
 	<header class="subheader">
-		<h2>Topplisten</h2>
+		<h2>Highscores</h2>
 		<div class="live-container">
 			<i class="live-icon"></i>
 			Live
