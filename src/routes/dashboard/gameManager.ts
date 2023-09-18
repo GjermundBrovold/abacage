@@ -1,11 +1,16 @@
 
 import {playerArray} from '../../firebase/firebase.mjs'
 
-let players = []
-playerArray.subscribe((arr) => {
-	players = arr;
-})
-
+let player: {
+	name: string;
+	nickname: string;
+	gamesPLayed: number;
+	sessionsPlayed: number;
+	score: number;
+	profilePictureUrl: string;
+	isAdmin: boolean;
+}
+export let players : Array<player>;
 
 let rounds = 0;
 export let numberOfTeams:number = 2;

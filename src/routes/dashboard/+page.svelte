@@ -10,6 +10,6 @@
 
 </script>
 <div>
-<h1>Cage<h1>
-<button on:click = {createTeams}>Create Teams</button>
+	<h1>Cage</h1>
+	<button on:click = {createTeams}>Create Teams</button>
 </div>
