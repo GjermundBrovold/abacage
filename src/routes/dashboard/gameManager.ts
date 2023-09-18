@@ -1,6 +1,6 @@
 
 import {playerArray} from '../../firebase/firebase.mjs'
-import {selectedPlayers} from '../admin/selectedPlayers.ts'
+import {selectedPlayers} from '../admin/selectedPlayers'
 
 import { writable } from "svelte/store";
 
@@ -17,7 +17,7 @@ console.log(selectedPlayers);
 let players = selectedPlayers;
 let rounds = 0;
 
-function shuffle(array) {
+function shuffle(array: Array<any>) {
   let currentIndex = array.length, randomIndex;
 
   // While there remain elements to shuffle.
@@ -39,7 +39,7 @@ export function newRound() {
 	
 }
 
-export default function newTeams(n) {
+export default function newTeams(n: any) {
 	let numberOfTeams = n.target.value
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
 	let teams = [];

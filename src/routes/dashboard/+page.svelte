@@ -27,7 +27,6 @@
 	<h1>Cage</h1>
 	<input type='text' on:change = {changeNumber}/>
 	<button on:click = {createTeams}>Create Teams</button>
-
 	<ul>
 		{#each $teams as team, index}
 			<li id="team"{index}>Team</li>
