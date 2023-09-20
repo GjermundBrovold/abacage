@@ -1,15 +1,6 @@
 <script lang="ts">
-	
-	export let player: {
-		name: string;
-		nickname: string;
-		gamesPLayed: number;
-		sessionsPlayed: number;
-		score: number;
-		profilePictureUrl: string;
-		isAdmin: boolean;
-	}
-	
+	import type {player} from '../player'	
+	export let player: player	
 	// console.log(player.name);
 	// console.log(player.profilePictureUrl);
 	

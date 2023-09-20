@@ -1,21 +1,12 @@
-
-import {playerArray} from '../../firebase/firebase.mjs'
 import {selectedPlayers} from '../admin/selectedPlayers'
 
-import { writable } from "svelte/store";
+import type {playerInterface} from '../player'	
+export let player: playerInterface
 
-let player: {
-	name: string;
-	nickname: string;
-	gamesPLayed: number;
-	sessionsPlayed: number;
-	score: number;
-	profilePictureUrl: string;
-	isAdmin: boolean;
-}
+
 console.log(selectedPlayers);
 let players = selectedPlayers;
-let rounds = 0;
+// let rounds = 0;
 
 function shuffle(array: Array<any>) {
   let currentIndex = array.length, randomIndex;
@@ -39,8 +30,8 @@ export function newRound() {
 	
 }
 
-export default function newTeams(n: any) {
-	let numberOfTeams = n.target.value
+export default function newTeams(n : number) {
+	let numberOfTeams = n
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
 	let teams = [];
 	let playerCopy = []

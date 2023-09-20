@@ -1,37 +1,30 @@
 <script lang="ts">
     import { writable } from "svelte/store";
     import { playerArray } from "../../firebase/firebase.mjs";
-    import { updatePlayer } from './selectedPlayers.ts'
+    import { updatePlayer } from './selectedPlayers'
     import Footer from "../Footer.svelte";
 	
-    let player: {
-		name: string;
-		nickname: string;
-		gamesPLayed: number;
-		sessionsPlayed: number;
-		score: number;
-		profilePictureUrl: string;
-		isAdmin: boolean;
-	}
+    import type { player } from '../player'
 
-    let players = writable([])
+    let pTemp: player[] = []
+    let players = writable(pTemp);
     playerArray.subscribe((arr) => {
-        players = writable(arr)
+        players = writable(arr);
     })
 
-    export const selectedPlayers:Array<typeof player> = []
+    export const selectedPlayers: Array<player> = []
 
-    function addOrRemovePlayer(p: typeof player) {
+    function addOrRemovePlayer(p: player) {
         updatePlayer(p);
     }
 </script>
 
 <div class="wrapper">
     <h1>Add Players</h1>
-    <ul>
+    <ul class="playerList">
         {#each $players as player, index}
                <li>
-                    <input on:click={addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
+                    <input on:change={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
                     <label for="checkbox{index}">
                         <img src="{player.profilePictureUrl}" alt="{player.nickname}'s profile pic">
                         <div class="name-container">
