@@ -10,8 +10,8 @@
 		isAdmin: boolean;
 	}
 	
-	console.log(player.name);
-	console.log(player.profilePictureUrl);
+	// console.log(player.name);
+	// console.log(player.profilePictureUrl);
 	
 </script>
 	
