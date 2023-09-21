@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type {player} from '../player'	
-	export let player: player	
+	import type {playerInterface} from '../player'	
+	export let player: playerInterface	
 	// console.log(player.name);
 	// console.log(player.profilePictureUrl);
 	

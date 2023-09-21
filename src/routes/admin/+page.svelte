@@ -4,17 +4,17 @@
     import { updatePlayer } from './selectedPlayers'
     import Footer from "../Footer.svelte";
 	
-    import type { player } from '../player'
+    import type { playerInterface } from '../player'
 
-    let pTemp: player[] = []
+    let pTemp: playerInterface[] = []
     let players = writable(pTemp);
     playerArray.subscribe((arr) => {
         players = writable(arr);
     })
 
-    export const selectedPlayers: Array<player> = []
+    export const selectedPlayers: Array<playerInterface> = []
 
-    function addOrRemovePlayer(p: player) {
+    function addOrRemovePlayer(p: playerInterface) {
         updatePlayer(p);
     }
 </script>

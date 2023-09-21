@@ -3,17 +3,17 @@
 
 	import { writable } from 'svelte/store';
 
-	import type { player } from '../player';
+	import type { playerInterface } from '../player';
 
 	let numberOfTeams: number = 2;
-	let pTemp: player[][] = [];
+	let pTemp: playerInterface[][] = [];
 	let teams = writable(pTemp);
-	let t = []
+	let t = [];
 	function createTeams(){
 		t = newTeams(numberOfTeams);
 		
 		teams.set(t);
-		console.log(t);
+		// console.log(t);
 	}
 
 	function changeNumber(n: any){
