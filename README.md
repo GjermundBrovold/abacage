@@ -1,10 +1,6 @@
 # ABACAGE
 Dette er vår side for å lage lag
 
->[!info]
->hei
-
-
 
 # create-svelte
 

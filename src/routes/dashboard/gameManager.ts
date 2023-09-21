@@ -1,4 +1,5 @@
-import {selectedPlayers} from '../admin/selectedPlayers'
+import { updatePlayer } from '../../firebase/databaseHelpers'
+import { selectedPlayers } from '../admin/selectedPlayers'
 
 import type {playerInterface} from '../player'	
 export let player: playerInterface
@@ -35,6 +36,17 @@ export default function newTeams(n : number) {
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
 	let teams = [];
 	let playerCopy = []
+	const p1:playerInterface = players[0];
+	p1.score ++;
+	console.log(players[0]);
+	const p = {
+		fullName: p1.name as any,
+		nickName: p1.nickname as any,
+		abakusUsername: p1.profilePictureUrl as any,
+		isAdmin: p1.isAdmin as any,	
+	}
+
+	updatePlayer(p1);
 	for (let i = 0; i<players.length; i++){
 		playerCopy.push(players[i]);
 	}
