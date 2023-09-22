@@ -2,7 +2,7 @@
 	import newTeams from './gameManager'
 
 	import { writable } from 'svelte/store';
-	import { updatePlayer } from '../../firebase/databaseHelpers';
+	import { updatePlayer, addNewPlayer } from '../../firebase/databaseHelpers';
 
 	import type { playerInterface } from '../player';
 
@@ -26,6 +26,19 @@
 	function changeNumber(n: any){
 		// console.log(n.target.value)
 		numberOfTeams = n.target.value;
+		// let player: playerInterface = {
+		// 	name: "Chris",
+		// 	nickname: "Toffeloffen",
+		// 	gamesPlayed: 0,
+		// 	sessionsPlayed: 0,
+		// 	score: 20,
+		// 	profilePictureUrl: "https://thumbor.abakus.no/SwaJhsB_Z7eIpcZS1QPVxcy2_-g=/200x200/8010C634A27B4FADB2D_8dHhL92.jpeg",
+		// 	isAdmin: false,
+		// 	abakusUsername: "Chrisern",
+		// 	id: 10
+		//
+		// }
+		// addNewPlayer(player);
 	}
 
 	function addPointsForWin(team: number){

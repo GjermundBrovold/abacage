@@ -1,6 +1,17 @@
 <script lang="ts" type="module">
 import ScoreboardItem from './ScoreboardItem.svelte'
 import { playerArray } from '../../firebase/firebase.mjs'
+import { writable } from 'svelte/store';
+import type { playerInterface } from '../player';
+
+let pTemp: playerInterface[] = []
+let players = writable(pTemp)
+
+playerArray.subscribe((arr) => {
+	let copy: playerInterface[] = arr.slice()
+	copy.sort((a, b) => b.score - a.score)
+	players.set(copy)
+})
 
 </script>
 
@@ -17,7 +28,7 @@ import { playerArray } from '../../firebase/firebase.mjs'
 
 
 <ul>
-	{#each $playerArray as player, index}
+	{#each $players as player, index}
 		<div class="wrapper">
 			<div class="rank-container">
 				<div class="rank">{index + 1}</div>

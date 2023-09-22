@@ -13,7 +13,7 @@ interface playerInterface{
 	profilePictureUrl: string;
 	isAdmin: boolean;
 	abakusUsername: string;
-	id: number;
+	id: string;
 };
 
 export type {playerInterface};

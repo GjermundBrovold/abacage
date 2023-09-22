@@ -9,7 +9,7 @@ const appSettings = {
 };
 
 const app = initializeApp(appSettings);
-const database = getDatabase(app);
+export const database = getDatabase(app);
 export const playersInDB = ref(database, 'players');
 
 export let playerArray = writable([]);
