@@ -1,6 +1,6 @@
-<!-- Vise spsifikk bruker -->
-<script>
-    import { load } from "../../loadPlayers";
-
-    load()
+<!-- Vise spesifikk bruker -->
+<script lang='ts'>
+    import type { playerInterface } from '../../player';
+    export let player: playerInterface;
+    console.log(player);
 </script>

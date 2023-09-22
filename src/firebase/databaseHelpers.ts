@@ -1,6 +1,6 @@
 import type { playerInterface } from "../routes/player";
 import { database, playersInDB } from "./firebase.mjs";
-import { ref, update, push, set } from "firebase/database";
+import { ref, update, push, set, onValue } from "firebase/database";
 
 
 function getProfilePicUrl(username:string) {
@@ -43,4 +43,9 @@ export function addNewPlayer(player: playerInterface){
   };
   const dbRef = ref(database, 'players/'+player.abakusUsername);
   set(dbRef, p);
+}
+
+export function getPlayer(username: string){
+  const playerRef = ref(database, 'players/' + username)
+  return playerRef
 }
