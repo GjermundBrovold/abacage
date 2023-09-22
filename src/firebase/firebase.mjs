@@ -26,12 +26,11 @@ function getProfilePicUrl(username) {
 onValue(playersInDB, function (snapshot) {
 	if (snapshot.exists()) {
 		let players = Object.entries(snapshot.val()).map(([id, playerData]) => {
-			playerData.id = id; 
 			return {
 				name: playerData.name,
 				nickname: playerData.nickname,
-				gamesPlayed: playerData.numberOfGamesPlayed,
-				sessionsPlayed: playerData.numberOfSessionsPlayed,
+				gamesPlayed: playerData.gamesPlayed,
+				sessionsPlayed: playerData.sessionsPlayed,
 				score: playerData.score,
 				profilePictureUrl: playerData.profilePictureUrl,
 				isAdmin: playerData.isAdmin,

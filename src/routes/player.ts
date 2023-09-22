@@ -1,3 +1,9 @@
+/*
+ * Player type that will be used in the project
+ * can be updated
+ */
+
+
 interface playerInterface{
 	name: string;
 	nickname: string;

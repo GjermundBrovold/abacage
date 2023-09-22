@@ -1,3 +1,8 @@
+/*
+*
+* Not used
+*
+*/
 //import player from '../firebase/database.ts'
 import cagersRef from '../firebase/firebase.ts'
 import firestore from 'firebase/firestore'

@@ -6,13 +6,16 @@
 	
     import type { playerInterface } from '../player'
 
+    // creates a writable of a playerInterface type
     let pTemp: playerInterface[] = []
     let players = writable(pTemp);
+    // updates players writable on database update
     playerArray.subscribe((arr) => {
-        players = writable(arr);
+        players.set(arr);
     })
 
-    export const selectedPlayers: Array<playerInterface> = []
+    // don't think this is used
+    // export const selectedPlayers: Array<playerInterface> = []
 
     function addOrRemovePlayer(p: playerInterface) {
         updatePlayer(p);

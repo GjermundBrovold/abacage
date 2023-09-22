@@ -5,10 +5,12 @@ import type {playerInterface} from '../player'
 export let player: playerInterface
 
 
-console.log(selectedPlayers);
+// console.log(selectedPlayers);
 let players = selectedPlayers;
 // let rounds = 0;
 
+// Shuffles an array
+// Can be rewritten to take points and etc into account
 function shuffle(array: Array<any>) {
   let currentIndex = array.length, randomIndex;
 
@@ -27,31 +29,26 @@ function shuffle(array: Array<any>) {
   return array;
 }
 
+// something new round something
 export function newRound() {
 	
 }
 
-export default function newTeams(n : number) {
+// returns new teams
+export default function newTeams(n : number): playerInterface[][] {
 	let numberOfTeams = n
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
-	let teams = [];
-	let playerCopy = []
-	const p1:playerInterface = players[0];
-	p1.score ++;
-	console.log(players[0]);
-	const p = {
-		fullName: p1.name as any,
-		nickName: p1.nickname as any,
-		abakusUsername: p1.profilePictureUrl as any,
-		isAdmin: p1.isAdmin as any,	
-	}
+	let teams: playerInterface[][] = [];
 
-	updatePlayer(p1);
-	for (let i = 0; i<players.length; i++){
-		playerCopy.push(players[i]);
-	}
 	let shuffled = shuffle(players.slice());
 
+	/*
+	* in the array each team is stored in
+	* [startIndex, startIndex + playersPerTeam) (end not included)
+	* ex
+	*			team 1    team 2
+	* [p1, p2, p3, p4] => [[p1, p2], [p3, p4]]
+	* */
 	let startIndex = 0;
 	for (let i = 0; i < numberOfTeams; i++) {
 		let team = []
@@ -64,6 +61,7 @@ export default function newTeams(n : number) {
 	}
 
 
+	// if there are any players left, it will add one at a time to a team
 	let index = 0;
 
 	for (let i = startIndex; i<players.length; i++){
