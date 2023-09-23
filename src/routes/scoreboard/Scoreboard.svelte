@@ -29,12 +29,14 @@ playerArray.subscribe((arr) => {
 
 <ul>
 	{#each $players as player, index}
-		<div class="wrapper">
-			<div class="rank-container">
-				<div class="rank">{index + 1}</div>
+		<a href="/user/{player.abakusUsername}">
+			<div class="wrapper">
+				<div class="rank-container">
+					<div class="rank">{index + 1}</div>
+				</div>
+				<ScoreboardItem {player} />
 			</div>
-			<ScoreboardItem {player} />
-		</div>
+		</a>
 	{/each}
 	
 	
@@ -42,6 +44,9 @@ playerArray.subscribe((arr) => {
 </ul>
 
 <style lang="scss">
+	a {
+		text-decoration: none; 
+	}
 	@keyframes blinking {  
 		from { opacity: 1; }
 		to { opacity: 0; }
