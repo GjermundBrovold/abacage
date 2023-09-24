@@ -39,7 +39,7 @@ onValue(playersInDB, function (snapshot) {
 			};
 		})
 		playerArray.set(players);
-		console.log(players);
+		// console.log(players);
 	} else {
 		// Handle the case when there is no data or an error
 		console.error('No data found or error occurred');
