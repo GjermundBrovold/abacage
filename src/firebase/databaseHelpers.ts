@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 import type { playerInterface } from "../routes/player";
 // import { database, playersInDB } from "./firebase.mjs";
-import { ref, update, push, set, onValue, get, getDatabase } from "firebase/database";
+import { ref, update, set, onValue, get, getDatabase } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
 const appSettings = {
@@ -15,14 +15,14 @@ export const playersInDB = ref(database, 'players');
 let pTemp: playerInterface[] = []
 export let playerArray = writable(pTemp)
 
-function getProfilePicUrl(username:string) {
+function getProfilePicUrl() {
   return 'https:thumbor.abakus.no/vTeRbni7WlbNvx1nmEbALGOAOSg=/200x200/default_male_avatar.png';
 }
 
+// moved from mjs file
 onValue(playersInDB, function (snapshot) {
-  console.log("TS")
   if (snapshot.exists()){
-    let players = Object.entries(snapshot.val()).map(([id, playerData]) => playerData as playerInterface)
+    let players = Object.entries(snapshot.val()).map((playerData) => playerData[1] as playerInterface)
     playerArray.set(players)
     console.log(players)
   }
@@ -35,18 +35,15 @@ export function updatePlayer(player: playerInterface){
     gamesPlayed: player.gamesPlayed,
     sessionsPlayed: player.sessionsPlayed,
     score: player.score,
-    profilePictureUrl: player.profilePictureUrl,
+    profilePictureUrl: player.profilePictureUrl ? player.profilePictureUrl != "" : getProfilePicUrl(),
     isAdmin: player.isAdmin,
     abakusUsername: player.abakusUsername,
-    // id: player.id,
   };
-  console.log("Player: ", player);
   const postKey = playersInDB.key;
   if (postKey == null) return;
 
   const updates: any = {};
-  updates[player.id] = p;
-  console.log(updates);
+  updates[player.abakusUsername] = p;
   return update(playersInDB, updates);
 }
 

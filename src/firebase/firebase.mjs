@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, push, onValue, update } from 'firebase/database';
+import { getDatabase, ref, push, onValue } from 'firebase/database';
 import { writable } from 'svelte/store';
 // import { getProfilePicUrl } from '../puppeteer';
 // import type { playerInterface } from '../routes/player'
@@ -18,12 +18,13 @@ export function getAllPlayers() {
 	return playerArray;
 }
 
-function getProfilePicUrl(username) {
+function getProfilePicUrl() {
 	return 'https:thumbor.abakus.no/vTeRbni7WlbNvx1nmEbALGOAOSg=/200x200/default_male_avatar.png';
 }
 
 // Set up the listener after Firebase initialization
 onValue(playersInDB, function (snapshot) {
+	console.log("MJS")
 	if (snapshot.exists()) {
 		let players = Object.entries(snapshot.val()).map(([id, playerData]) => {
 			return {
@@ -54,7 +55,7 @@ export function addNewPlayer({ fullName, nickname, abakusUsername, isAdmin }) {
 		numberOfGamesPlayed: 0,
 		numberOfSessionsPlayed: 0,
 		score: 0,
-		profilePictureUrl: getProfilePicUrl(abakusUsername),
+		profilePictureUrl: getProfilePicUrl(),
 		isAdmin: isAdmin
 	});
 }

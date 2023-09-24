@@ -1,6 +1,6 @@
 <script lang="ts" type="module">
 import ScoreboardItem from './ScoreboardItem.svelte'
-import { playerArray } from '../../firebase/firebase.mjs'
+import { playerArray } from '../../firebase/databaseHelpers'
 import { writable } from 'svelte/store';
 import type { playerInterface } from '../player';
 

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { writable } from "svelte/store";
-    import { playerArray } from "../../firebase/firebase.mjs";
+    import { playerArray } from "../../firebase/databaseHelpers";
     import { updatePlayer } from './selectedPlayers'
     import Footer from "../Footer.svelte";
 	
@@ -8,10 +8,12 @@
 
     // creates a writable of a playerInterface type
     let pTemp: playerInterface[] = []
-    let players = writable(pTemp);
+    let playersWritable = writable(pTemp);
+    let players: playerInterface[];
     // updates players writable on database update
     playerArray.subscribe((arr) => {
-        players.set(arr);
+        players = arr
+        playersWritable.set(arr);
     })
 
     // don't think this is used
@@ -20,12 +22,31 @@
     function addOrRemovePlayer(p: playerInterface) {
         updatePlayer(p);
     }
+
+    // Simple search through name and nickname and updates players
+    // This fucks up the select checkbox
+    // Might want to change it to a div
+    // and rather change the look of the div when player is selected
+    function searchPlayers(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
+        let s: string = event.currentTarget.value.toLowerCase()
+        if (s==""){
+            playersWritable.set(players)
+        }
+        let searchedPlayers: playerInterface[] = []
+        players.forEach(player => {
+            if (player.name.toLowerCase().startsWith(s) || player.nickname.toLowerCase().startsWith(s)){
+                searchedPlayers.push(player)
+            }
+        });
+        playersWritable.set(searchedPlayers)
+    }
 </script>
 
 <div class="wrapper">
     <h1>Add Players</h1>
+    <input type="text" on:input={searchPlayers}/>
     <ul class="playerList">
-        {#each $players as player, index}
+        {#each $playersWritable as player, index}
                <li>
                     <input on:change={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
                     <label for="checkbox{index}">
