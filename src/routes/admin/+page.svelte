@@ -6,15 +6,6 @@
 	
     import type { playerInterface } from '../player'
 
-    interface playerWithSelect {
-        checked: Boolean;
-        player: playerInterface;
-    }
-
-    function createPlayer(player: playerInterface): playerWithSelect{
-        return {checked: false, player}
-    }
-
     // creates a writable of a playerInterface type
     let pTemp: playerInterface[] = []
     let playersWritable = writable(pTemp);
