@@ -1,7 +1,7 @@
 <script lang="ts">
     import { writable } from "svelte/store";
     import { playerArray } from "../../firebase/databaseHelpers";
-    import { updatePlayer } from './selectedPlayers'
+    import { updatePlayer, isSelected } from './selectedPlayers'
     import Footer from "../Footer.svelte";
 	
     import type { playerInterface } from '../player'
@@ -47,16 +47,20 @@
     <input type="text" on:input={searchPlayers}/>
     <ul class="playerList">
         {#each $playersWritable as player, index}
-               <li>
+            <li>
+                {#if !isSelected(player)}
                     <input on:click={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
-                    <label for="checkbox{index}">
-                        <img src="{player.profilePictureUrl}" alt="{player.nickname}'s profile pic">
-                        <div class="name-container">
-                            <h2>{player.nickname}</h2>
-                            <h3>{player.name}</h3>
-                        </div>
-                    </label>
-               </li> 
+                {:else}
+                    <input on:click={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}" checked>
+                {/if}
+                <label for="checkbox{index}">
+                    <img src="{player.profilePictureUrl}" alt="{player.nickname}'s profile pic">
+                    <div class="name-container">
+                        <h2>{player.nickname}</h2>
+                        <h3>{player.name}</h3>
+                    </div>
+                </label>
+            </li> 
         {/each}
     </ul>
 

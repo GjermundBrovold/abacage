@@ -14,3 +14,7 @@ export function updatePlayer(p: playerInterface){
 	}
 
 }
+
+export function isSelected(p: playerInterface): boolean {
+	return selectedPlayers.indexOf(p) >= 0;
+}
