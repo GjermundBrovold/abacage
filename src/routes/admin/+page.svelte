@@ -6,6 +6,15 @@
 	
     import type { playerInterface } from '../player'
 
+    interface playerWithSelect {
+        checked: Boolean;
+        player: playerInterface;
+    }
+
+    function createPlayer(player: playerInterface): playerWithSelect{
+        return {checked: false, player}
+    }
+
     // creates a writable of a playerInterface type
     let pTemp: playerInterface[] = []
     let playersWritable = writable(pTemp);
@@ -48,7 +57,7 @@
     <ul class="playerList">
         {#each $playersWritable as player, index}
                <li>
-                    <input on:change={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
+                    <input on:click={() => addOrRemovePlayer(player)} type="checkbox" name="checkbox{index}" id="checkbox{index}">
                     <label for="checkbox{index}">
                         <img src="{player.profilePictureUrl}" alt="{player.nickname}'s profile pic">
                         <div class="name-container">
