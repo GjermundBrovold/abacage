@@ -32,8 +32,7 @@
 			margin-right: 1em;
 			border-radius: 50%;
 		}
-
-
+		
 		.container {
 			display: flex;
 			justify-content: space-between;
