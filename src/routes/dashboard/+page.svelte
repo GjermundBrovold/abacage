@@ -5,6 +5,8 @@
 	import { updatePlayer, addNewPlayer } from '../../firebase/databaseHelpers';
 
 	import type { playerInterface } from '../player';
+	import { createSession } from '../../firebase/sessions';
+	import { selectedPlayers } from '../admin/selectedPlayers';
 
 	let numberOfTeams: number = 2;
 
@@ -51,12 +53,19 @@
 		});
 	}
 
+	function sessionTest(){
+		createSession(selectedPlayers)
+	}
+
+
+
 </script>
 <div>
 	<h1>Cage</h1>
 	<input type='text' on:change = {changeNumber}/>
 	<button on:click = {createTeams}>Create Teams</button>
 	<button on:click = {()=>addPointsForWin(0)}>Team 1 win</button>
+	<button on:click = {()=>sessionTest()}>Create session</button>
 	<ul>
 		<!--
 		Loops over the teams writable

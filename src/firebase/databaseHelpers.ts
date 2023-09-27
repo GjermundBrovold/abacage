@@ -85,9 +85,9 @@ export async function getPlayerSnapshot(username: string){
 
   await get(playerRef)
   .then((snapshot) => {
-    if (snapshot.exists()){
+    if (snapshot.exists())
       player = snapshot.val();
-    }
+
   })
   return player;
 }
