@@ -7,6 +7,7 @@
 	import type { playerInterface } from '../player';
 	import { createSession } from '../../firebase/sessions';
 	import { selectedPlayers } from '../admin/selectedPlayers';
+    console.log("A")
 
 	let numberOfTeams: number = 2;
 
