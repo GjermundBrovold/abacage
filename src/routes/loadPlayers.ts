@@ -4,7 +4,7 @@
 *
 */
 //import player from '../firebase/database.ts'
-import cagersRef from '../firebase/firebase.ts'
+import {cagersRef} from '../firebase/firebase'
 import firestore from 'firebase/firestore'
 
 export function load(){

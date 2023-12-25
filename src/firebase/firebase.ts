@@ -2,7 +2,7 @@ import { initializeApp, getApp, getApps} from "firebase/app";
 import { getFirestore} from "firebase/firestore";
 import { getDatabase, ref, push, onValue } from "firebase/database";
 import { API_KEY, AUTH_DOMAIN, PROJECT_ID, STORAGE_BUCKET, MESSEGING_SENDER_ID, APP_ID, MEASUREENT_ID, REALTIME_DATABASE_NAME } from "$env/static/private";
-import { collection, doc, setDoc, getDoc } from "firebase/firestore";
+// import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 
 
 export const firebaseConfig = {
@@ -42,7 +42,7 @@ onValue(playersInDB, function(snapshot){
 //export const docSnap = await getDoc(docRef);
 
 
-export { db_Firestore, db_Realtime};
+// export { db_Firestore, db_Realtime};
 
 
 
