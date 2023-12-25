@@ -65,7 +65,7 @@
     </ul>
 
     <div class="anchor-container">
-        <a href="/dashboard ">Add players</a>
+        <a href="/dashboard">Add players</a>
     </div>
 </div>
 

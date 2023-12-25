@@ -46,11 +46,14 @@
 
 	function addPointsForWin(team: number){
 
+        console.log(t);
 		t[team].forEach(player => {
 			// win is 3 points
+			console.log(player.score);
 			player.score += 3;
+            console.log("Updating:")
+			console.log(player.score);
 			updatePlayer(player);
-			// console.log(player);
 		});
 	}
 
