@@ -20,22 +20,22 @@ function getProfilePicUrl() {
 }
 
 // moved from mjs file
-onValue(playersInDB, function (snapshot) {
-    if (snapshot.exists()){
-        let players = Object.entries(snapshot.val()).map((playerData) => playerData[1] as playerInterface)
+onValue(playersInDB, function(snapshot) {
+    if (snapshot.exists()) {
+        const players = Object.entries(snapshot.val()).map((playerData) => playerData[1] as playerInterface)
         playerArray.set(players)
         console.log(players)
     }
 })
 
-export function updatePlayer(player: playerInterface){
-    const p = {
+export function updatePlayer(player: playerInterface) {
+    const p: playerInterface = {
         name: player.name,
         nickname: player.nickname,
         gamesPlayed: player.gamesPlayed,
         sessionsPlayed: player.sessionsPlayed,
         score: player.score,
-        profilePictureUrl: player.profilePictureUrl ? player.profilePictureUrl != "" : getProfilePicUrl(),
+        profilePictureUrl: player.profilePictureUrl != "" ? player.profilePictureUrl : getProfilePicUrl(),
         isAdmin: player.isAdmin,
         abakusUsername: player.abakusUsername,
     };
@@ -48,7 +48,7 @@ export function updatePlayer(player: playerInterface){
     return update(playersInDB, updates);
 }
 
-export function addNewPlayer(player: playerInterface){
+export function addNewPlayer(player: playerInterface) {
     const p = {
         name: player.name,
         nickname: player.nickname,
@@ -60,16 +60,16 @@ export function addNewPlayer(player: playerInterface){
         abakusUsername: player.abakusUsername,
         // id: player.id,
     };
-    const dbRef = ref(database, 'players/'+player.abakusUsername);
+    const dbRef = ref(database, 'players/' + player.abakusUsername);
     set(dbRef, p);
 }
 
-export function getPlayer(username: string){
+export function getPlayer(username: string) {
     const playerRef = ref(database, 'players/' + username)
     return playerRef
 }
 
-export async function getPlayerSnapshot(username: string){
+export async function getPlayerSnapshot(username: string) {
     const playerRef = getPlayer(username);
     let noUser: playerInterface = {
         name: "NOUSER",
@@ -84,16 +84,16 @@ export async function getPlayerSnapshot(username: string){
     let player: playerInterface = noUser;
 
     await get(playerRef)
-    .then((snapshot) => {
-        if (snapshot.exists())
-        player = snapshot.val();
+        .then((snapshot) => {
+            if (snapshot.exists())
+                player = snapshot.val();
 
-    })
+        })
     return player;
 }
 
-export async function getPlayers (usernames: string[]){
-    let players: playerInterface[] = [];
+export async function getPlayers(usernames: string[]) {
+    const players: playerInterface[] = [];
     usernames.forEach(name => getPlayerSnapshot(name).then(p => players.push(p)))
     return players;
 }
