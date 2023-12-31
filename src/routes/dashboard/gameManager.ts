@@ -1,12 +1,6 @@
-import { updatePlayer } from '../../firebase/databaseHelpers'
-import { selectedPlayers } from '../admin/selectedPlayers'
-
 import type {playerInterface} from '../player'	
-export let player: playerInterface
 
 
-// console.log(selectedPlayers);
-let players = selectedPlayers;
 // let rounds = 0;
 
 // Shuffles an array
@@ -35,7 +29,7 @@ export function newRound() {
 }
 
 // returns new teams
-export default function newTeams(n : number): playerInterface[][] {
+export default function newTeams(players: playerInterface[], n : number): playerInterface[][] {
 	let numberOfTeams = n
 	let playersPerTeam:number = Math.floor(players.length / numberOfTeams);
 	let teams: playerInterface[][] = [];

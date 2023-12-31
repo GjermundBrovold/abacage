@@ -1,7 +1,8 @@
 <script lang="ts">
     import { writable } from "svelte/store";
     import { playerArray } from "../../firebase/databaseHelpers";
-    import { updatePlayer, isSelected } from './selectedPlayers'
+    import { createSession } from "../../firebase/sessions"
+    import { updatePlayer, isSelected, getPlayers } from './selectedPlayers'
     import Footer from "../Footer.svelte";
 	
     import type { playerInterface } from '../player'
@@ -40,6 +41,11 @@
         });
         playersWritable.set(searchedPlayers)
     }
+
+    function create() {
+        let players = getPlayers();
+        createSession(players);
+    }
 </script>
 
 <div class="wrapper">
@@ -65,7 +71,9 @@
     </ul>
 
     <div class="anchor-container">
-        <a href="/dashboard">Add players</a>
+        <button on:click={() => create()} style="">
+            <a href="/dashboard">Create Session</a>
+        </button>
     </div>
 </div>
 

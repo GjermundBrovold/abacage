@@ -1,30 +1,36 @@
 import { playersInDB, database, } from "./databaseHelpers";
 import type { playerInterface } from "../routes/player";
 import { get, ref, set, onValue, update } from "firebase/database";
-import type { sessionInterface, matchInterface } from "../routes/sessionInterface";
+import type { sessionInterfaceDB, matchInterface } from "../routes/sessionInterface";
 import { writable, type Writable } from "svelte/store";
 
+//ref to database under /sessions/
 export let sessionsInDB = ref(database, 'sessions')
-export let sessionsArray: sessionInterface[] = [];
-export let sessionsWritable: Writable<sessionInterface[]> = writable(sessionsArray);
+//Latest sessions registered
+export let sessionsArray: sessionInterfaceDB[] = [];
+//Writable of sessions / will be updated on changes
+export let sessionsWritable: Writable<sessionInterfaceDB[]> = writable(sessionsArray);
 
 
+// Updates sessions from database
 onValue(sessionsInDB, function (snapshot) {
     if (snapshot.exists()){
         let sessions = Object.entries(snapshot.val()).map((sessionData) => {
-            console.log("Sessions:", sessionData[1].players);
-            let session: sessionInterface = {
+            let players = (sessionData[1].players as string[]);
+            let session: sessionInterfaceDB = {
                 date: sessionData[0],
-                players: sessionData[1].players as string[],
+                players: players,
                 matches: [] as matchInterface[]
             }
             return session
         })
+
         sessionsWritable.set(sessions)
         sessionsArray = sessions
     }
 })
 
+//GPT:)
 function getDate(): string{
     const date = new Date();
     const options: Intl.DateTimeFormatOptions = {
@@ -36,14 +42,17 @@ function getDate(): string{
 
     //!!swap with formattedDate, this is only for testing
     console.log(formattedDate);
-    return "25:12:2023"
+    return formattedDate;
 }
 
+/*
+ * Creates session with no matches played on current date
+*/
 export function createSession(players: playerInterface[]){
     const formattedDate = getDate();
     let usernames: string[] = []
     players.forEach(p => usernames.push(p.abakusUsername))
-    const session: sessionInterface = {
+    const session: sessionInterfaceDB = {
         date: formattedDate,
         players: usernames,
         matches: [] as matchInterface[]
@@ -52,7 +61,10 @@ export function createSession(players: playerInterface[]){
     set(sessionDBRef, session)
 }
 
-export function updateSession(session: sessionInterface){
+/*
+ * Updates session
+ */
+export function updateSession(session: sessionInterfaceDB){
     const postKey = sessionsInDB.key;
     if (postKey == null) return;
 
@@ -61,12 +73,12 @@ export function updateSession(session: sessionInterface){
     return update(sessionsInDB, updates)
 }
 
-export function addPlayerToSession(session: sessionInterface, player: playerInterface){
+export function addPlayerToSession(session: sessionInterfaceDB, player: playerInterface){
     session.players.push(player.abakusUsername)
     updateSession(session);
 }
 
-export function removePlayerFromSession(session: sessionInterface, player: playerInterface){
+export function removePlayerFromSession(session: sessionInterfaceDB, player: playerInterface){
     session.players.splice(session.players.indexOf(player.abakusUsername),1)
     updateSession(session)
 }
@@ -78,17 +90,18 @@ export function getSessionForDate(date: string = getDate()){
 
 export async function getSessionSnapshot(date: string = getDate()){
     const sessionRef = getSessionForDate(date)
-    let noSession: sessionInterface = {
+    let noSession: sessionInterfaceDB = {
         date,
         players: [],
         matches: [],
     }
-    let session: sessionInterface = noSession
+    let session: sessionInterfaceDB = noSession
 
     await get(sessionRef)
     .then((snapshot) => {
-        if (snapshot.exists())
-        session = snapshot.val()
+        if (snapshot.exists()){
+            session = snapshot.val()
+        }
     })
     return session
 }

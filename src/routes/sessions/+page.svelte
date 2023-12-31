@@ -1,27 +1,27 @@
 <script lang="ts">
 	import { writable } from "svelte/store";
-	import { sessionsWritable } from "../../firebase/sessions";
-    import type { sessionInterface, matchInterface } from "../sessionInterface";
-    let sTemp: sessionInterface[] = [];
+	import { sessionsWritable, getSessionSnapshot } from "../../firebase/sessions";
+    import type { sessionInterfaceDB, matchInterface } from "../sessionInterface";
+    import Session from './components/Session.svelte'
+    let sTemp: sessionInterfaceDB[] = [];
 
     let sessions = writable(sTemp);
-    sessionsWritable.subscribe((arr:sessionInterface[]) => {
+    sessionsWritable.subscribe((arr:sessionInterfaceDB[]) => {
         sTemp = arr.slice();
-        console.log(sTemp)
         sessions.set(sTemp);
     })
+
+    function test() { 
+        console.log("TEST")
+        getSessionSnapshot().then((session) => console.log(session));
+    }
+
 </script>
 <div>
     <ul>
-    {#each $sessions as session, index}
-        <li>
-            {session.date}
-            <ul>
-            {#each session.players as playerName}
-                <li>{playerName}</li>
-            {/each}
-            </ul>
-        </li>
+    {#each $sessions as session}
+        <Session {session}/>
     {/each}
     </ul>
+    <button on:click={() => test()}>Test</button>
 </div>

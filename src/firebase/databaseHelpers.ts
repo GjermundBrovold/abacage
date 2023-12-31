@@ -71,7 +71,7 @@ export function getPlayer(username: string){
 
 export async function getPlayerSnapshot(username: string){
     const playerRef = getPlayer(username);
-    let noUser = {
+    let noUser: playerInterface = {
         name: "NOUSER",
         nickname: "NOUSER",
         gamesPlayed: 0,
@@ -80,7 +80,6 @@ export async function getPlayerSnapshot(username: string){
         profilePictureUrl: "",
         isAdmin: false,
         abakusUsername: "",
-        id: ""
     }
     let player: playerInterface = noUser;
 
@@ -91,4 +90,10 @@ export async function getPlayerSnapshot(username: string){
 
     })
     return player;
+}
+
+export async function getPlayers (usernames: string[]){
+    let players: playerInterface[] = [];
+    usernames.forEach(name => getPlayerSnapshot(name).then(p => players.push(p)))
+    return players;
 }
