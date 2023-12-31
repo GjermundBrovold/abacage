@@ -71,29 +71,30 @@
 		if (session.matches == undefined) {
 			session.matches = [];
 		}
+
 		session.matches.push(currentMatch);
+
 		let sDB: sessionInterfaceDB = {
 			date: session.date,
 			players: session.players.map((p) => p.name),
 			matches: session.matches
 		};
+
 		updateSession(sDB);
 
 		scoreboard.forEach((row, name) => {
-			let temp: playerInterface[] = [];
 			let won = t[team].find((p) => p.name == name);
-			let score: number = (won != undefined) ? 3 : 0;
+			let score: number = won != undefined ? 3 : 0;
 			row.push(score);
 		});
 		console.log(scoreboard);
 	}
 
-
-    function printScoreboard(){
-        scoreboard.forEach((row, name) => {
-            console.log(name + ":", row)
-        })
-    }
+	function printScoreboard() {
+		scoreboard.forEach((row, name) => {
+			console.log(name + ':', row);
+		});
+	}
 </script>
 
 <div>
@@ -105,7 +106,7 @@
 	<ul>
 		<!--
 		Loops over the teams writable
-		$ is means it will be updated when teams change
+		$ means it will be updated when teams change
 		-->
 		{#each $teams as team, index}
 			<h3>Team {index + 1}</h3>
