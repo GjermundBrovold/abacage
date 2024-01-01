@@ -13,8 +13,8 @@ export let sessionsWritable: Writable<sessionInterfaceDB[]> = writable(sessionsA
 
 
 // Updates sessions from database
-onValue(sessionsInDB, function (snapshot) {
-    if (snapshot.exists()){
+onValue(sessionsInDB, function(snapshot) {
+    if (snapshot.exists()) {
         let sessions = Object.entries(snapshot.val()).map((sessionData) => {
             let players = (sessionData[1].players as string[]);
             let session: sessionInterfaceDB = {
@@ -31,7 +31,7 @@ onValue(sessionsInDB, function (snapshot) {
 })
 
 //GPT:)
-function getDate(): string{
+function getDate(): string {
     const date = new Date();
     const options: Intl.DateTimeFormatOptions = {
         year: 'numeric', // 'numeric', '2-digit'
@@ -48,7 +48,7 @@ function getDate(): string{
 /*
  * Creates session with no matches played on current date
 */
-export function createSession(players: playerInterface[]){
+export function createSession(players: playerInterface[]) {
     const formattedDate = getDate();
     let usernames: string[] = []
     players.forEach(p => usernames.push(p.abakusUsername))
@@ -64,7 +64,7 @@ export function createSession(players: playerInterface[]){
 /*
  * Updates session
  */
-export function updateSession(session: sessionInterfaceDB){
+export function updateSession(session: sessionInterfaceDB) {
     const postKey = sessionsInDB.key;
     if (postKey == null) return;
 
@@ -73,22 +73,22 @@ export function updateSession(session: sessionInterfaceDB){
     return update(sessionsInDB, updates)
 }
 
-export function addPlayerToSession(session: sessionInterfaceDB, player: playerInterface){
+export function addPlayerToSession(session: sessionInterfaceDB, player: playerInterface) {
     session.players.push(player.abakusUsername)
     updateSession(session);
 }
 
-export function removePlayerFromSession(session: sessionInterfaceDB, player: playerInterface){
-    session.players.splice(session.players.indexOf(player.abakusUsername),1)
+export function removePlayerFromSession(session: sessionInterfaceDB, player: playerInterface) {
+    session.players.splice(session.players.indexOf(player.abakusUsername), 1)
     updateSession(session)
 }
 
 
-export function getSessionForDate(date: string = getDate()){
+export function getSessionForDate(date: string = getDate()) {
     return ref(database, 'sessions/' + date)
 }
 
-export async function getSessionSnapshot(date: string = getDate()){
+export async function getSessionSnapshot(date: string = getDate()) {
     const sessionRef = getSessionForDate(date)
     let noSession: sessionInterfaceDB = {
         date,
@@ -98,10 +98,10 @@ export async function getSessionSnapshot(date: string = getDate()){
     let session: sessionInterfaceDB = noSession
 
     await get(sessionRef)
-    .then((snapshot) => {
-        if (snapshot.exists()){
-            session = snapshot.val()
-        }
-    })
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                session = snapshot.val()
+            }
+        })
     return session
 }
