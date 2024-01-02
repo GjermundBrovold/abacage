@@ -39,7 +39,7 @@
 		t = newTeams(session.players, numberOfTeams);
 
 		teams.set(t);
-		let p: string[][] = t.map((team) => team.map((p) => p.nickname));
+		let p: string[][] = t.map((team) => team.map((p) => p.abakusUsername));
         console.log("players", p);
 		currentMatch = {
 			players: p,
@@ -70,7 +70,7 @@
 
 		let sDB: sessionInterfaceDB = {
 			date: session.date,
-			players: session.players.map((p) => p.name),
+			players: session.players.map((p) => p.abakusUsername),
 			matches: session.matches
 		};
 
@@ -90,6 +90,9 @@
 			console.log(name + ':', row);
             let r:any[] = row.slice();
             r.unshift(name);
+            let sum = (row.reduce((a, b) => a+b), 0)
+            console.log("SUM", sum);
+            // r.push(sum)
             score.push(r);
 		});
         console.table(score);
