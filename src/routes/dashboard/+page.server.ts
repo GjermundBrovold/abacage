@@ -1,6 +1,22 @@
-import type { sessionInterfaceDB } from '../sessionInterface'
+import type { sessionInterfaceDB, sessionInterface } from '../sessionInterface';
 import { getSessionSnapshot } from '../../firebase/sessions';
+import { getPlayersFromArray } from '../../firebase/databaseHelpers';
+import type { playerInterface } from '../player';
 
-export async function load(): Promise<sessionInterfaceDB> {
-    return getSessionSnapshot()
+// async function getPlayers(session: sessionInterfaceDB): Promise<playerInterface[]>{
+//     let players: playerInterface[] = [];
+//     return session.players.map(p => {
+//         getPlayerSnapshot(p) as Promise<playerInterface>
+//     })
+// }
+
+export async function load(): Promise<sessionInterface> {
+	const session = await getSessionSnapshot();
+	const players: playerInterface[] = getPlayersFromArray(session.players);
+	const s: sessionInterface = {
+		date: session.date,
+		players: players,
+		matches: session.matches
+	};
+	return s;
 }

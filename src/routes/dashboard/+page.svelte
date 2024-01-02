@@ -8,28 +8,21 @@
 	import { createSession, updateSession } from '../../firebase/sessions';
 	import { selectedPlayers } from '../admin/selectedPlayers';
 	import type { sessionInterfaceDB, matchInterface, sessionInterface } from '../sessionInterface';
-	export let data: sessionInterfaceDB;
-	let playersArray: playerInterface[] = [];
+	export let data: sessionInterface;
+	let playersArray: playerInterface[] = data.players;
 
 	// current session stored
-	let session: sessionInterface = {
-		date: data.date,
-		//will be updated when playersArray is updated
-		players: playersArray,
-		matches: data.matches != undefined ? data.matches : ([] as matchInterface[])
-	};
-
+	let session: sessionInterface = data
+    session.matches = session.matches == undefined ? [] as matchInterface[] : session.matches;
 	//let scoreboard: number[][] = [];
 	let scoreboard: Map<string, number[]> = new Map();
 
+    console.log("data:", data);
 	//updates session
-	data.players.forEach((name) =>
-		getPlayerSnapshot(name).then((p) => {
-			playersArray.push(p);
-			let row: number[] = Array(session.matches.length).fill(0);
-			scoreboard.set(p.name, row);
-		})
-	);
+	session.players.forEach((p) => {
+		let row: number[] = Array(session.matches.length).fill(0);
+		scoreboard.set(p.name, row);
+	});
 
 	let numberOfTeams: number = 2;
 	let matches: matchInterface[] = [];
@@ -47,6 +40,7 @@
 
 		teams.set(t);
 		let p: string[][] = t.map((team) => team.map((p) => p.nickname));
+        console.log("players", p);
 		currentMatch = {
 			players: p,
 			team1Points: 0
@@ -91,9 +85,14 @@
 	}
 
 	function printScoreboard() {
+        let score: any[] = []
 		scoreboard.forEach((row, name) => {
 			console.log(name + ':', row);
+            let r:any[] = row.slice();
+            r.unshift(name);
+            score.push(r);
 		});
+        console.table(score);
 	}
 </script>
 

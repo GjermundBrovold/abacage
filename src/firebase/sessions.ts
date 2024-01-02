@@ -41,7 +41,6 @@ function getDate(): string {
     const formattedDate = date.toLocaleDateString(undefined, options).replaceAll('/', ':')
 
     //!!swap with formattedDate, this is only for testing
-    console.log(formattedDate);
     return formattedDate;
 }
 
