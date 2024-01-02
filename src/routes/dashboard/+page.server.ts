@@ -1,6 +1,6 @@
 import type { sessionInterfaceDB, sessionInterface } from '../sessionInterface';
 import { getSessionSnapshot } from '../../firebase/sessions';
-import { getPlayersFromArray } from '../../firebase/databaseHelpers';
+import { getPlayerSnapshot, getPlayersFromArray } from '../../firebase/databaseHelpers';
 import type { playerInterface } from '../player';
 
 // async function getPlayers(session: sessionInterfaceDB): Promise<playerInterface[]>{
@@ -12,6 +12,8 @@ import type { playerInterface } from '../player';
 
 export async function load(): Promise<sessionInterface> {
 	const session = await getSessionSnapshot();
+    console.log(session);
+    const player = await getPlayerSnapshot("kaspermj");
 	const players: playerInterface[] = getPlayersFromArray(session.players);
 	const s: sessionInterface = {
 		date: session.date,

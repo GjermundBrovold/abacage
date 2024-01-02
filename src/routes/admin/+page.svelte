@@ -42,9 +42,9 @@
         playersWritable.set(searchedPlayers)
     }
 
-    function create() {
+    async function create() {
         let players = getPlayers();
-        createSession(players);
+        await createSession(players);
     }
 </script>
 

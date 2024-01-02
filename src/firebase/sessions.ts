@@ -47,9 +47,9 @@ function getDate(): string {
 /*
  * Creates session with no matches played on current date
 */
-export function createSession(players: playerInterface[]) {
+export async function createSession(players: playerInterface[]) {
     const formattedDate = getDate();
-    let usernames: string[] = []
+    const usernames: string[] = []
     players.forEach(p => usernames.push(p.abakusUsername))
     const session: sessionInterfaceDB = {
         date: formattedDate,
@@ -57,7 +57,7 @@ export function createSession(players: playerInterface[]) {
         matches: [] as matchInterface[]
     }
     const sessionDBRef = ref(database, 'sessions/' + formattedDate)
-    set(sessionDBRef, session)
+    await set(sessionDBRef, session)
 }
 
 /*
