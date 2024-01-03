@@ -19,8 +19,8 @@ onValue(sessionsInDB, function(snapshot) {
             let players = (sessionData[1].players as string[]);
             let session: sessionInterfaceDB = {
                 date: sessionData[0],
-                players: players,
-                matches: [] as matchInterface[]
+                players: players || [] as playerInterface[], // In case if there are no players, so that it will not be undefined
+                matches: sessionData[1].matches as matchInterface[] || [] as matchInterface[] //In case if there are no matches
             }
             return session
         })
