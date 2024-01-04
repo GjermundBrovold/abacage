@@ -100,7 +100,7 @@ export async function getPlayers(usernames: string[]) {
 }
 
 export function getPlayersFromArray(usernames: string[]): playerInterface[] {
-    console.log("Usernames", usernames);
+    // console.log("Usernames", usernames);
     return usernames.map((name) => {
         return players.find((p) => p.abakusUsername == name) || noUser;
     });

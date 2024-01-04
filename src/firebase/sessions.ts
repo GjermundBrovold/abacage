@@ -1,4 +1,4 @@
-import { playersInDB, database, } from "./databaseHelpers";
+import { playersInDB, database, updatePlayer, } from "./databaseHelpers";
 import type { playerInterface } from "../routes/player";
 import { get, ref, set, onValue, update } from "firebase/database";
 import type { sessionInterfaceDB, matchInterface } from "../routes/sessionInterface";
@@ -49,8 +49,13 @@ function getDate(): string {
 */
 export async function createSession(players: playerInterface[]) {
     const formattedDate = getDate();
-    const usernames: string[] = []
-    players.forEach(p => usernames.push(p.abakusUsername))
+    const usernames: string[] = players.map(p => p.abakusUsername)
+
+    players.forEach(p => {
+        p.sessionsPlayed += 1
+        updatePlayer(p)
+    })
+
     const session: sessionInterfaceDB = {
         date: formattedDate,
         players: usernames,
